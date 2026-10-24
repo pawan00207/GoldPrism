@@ -1,6 +1,5 @@
 {
   "name": "GoldPrism",
   "description": "MCX Gold Commodity Derivatives Intelligence & Execution Terminal",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "requestFramePermissions": []
 }
