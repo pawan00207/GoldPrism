@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Incident Beam (White/Cyan) -->
+    <path
+        android:pathData="M24,64 L45,54"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:strokeColor="#E0F2FE" />
+
+    <!-- Dispersed Rays -->
+    <!-- Gold Beam (Upper) -->
+    <path
+        android:pathData="M63,50 L88,38"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeColor="#F59E0B" />
+
+    <!-- Cyan Beam (Center) -->
+    <path
+        android:pathData="M65,56 L89,55"
+        android:strokeWidth="3.0"
+        android:strokeLineCap="round"
+        android:strokeColor="#06B6D4" />
+
+    <!-- Violet Beam (Lower) -->
+    <path
+        android:pathData="M63,62 L88,72"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeColor="#A855F7" />
+
+    <!-- Glass Prism Body -->
+    <path
+        android:pathData="M54,26 L76,72 L32,72 Z"
+        android:strokeWidth="2.5"
+        android:strokeColor="#FFFFFF">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="32"
+                android:startY="26"
+                android:endX="76"
+                android:endY="72"
+                android:type="linear">
+                <item android:color="#33FFFFFF" android:offset="0.0" />
+                <item android:color="#1A38BDF8" android:offset="0.5" />
+                <item android:color="#2DFBBF24" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Golden Core / Bullion bar facet -->
+    <path
+        android:pathData="M49,54 L59,54 L62,64 L46,64 Z"
+        android:fillColor="#FFD700" />
+</vector>

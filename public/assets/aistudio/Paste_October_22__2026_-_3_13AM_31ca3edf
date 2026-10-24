@@ -1,0 +1,809 @@
+PROJECT: GoldPrism
+TAGLINE: Prism That Explains Scattered Gold
+HACKATHON: Hack in Hills ’26 — Track 03: Commodity Derivatives Intelligence
+TEAM: ARCEUS
+TEAM MEMBERS:
+- Manik Khurana — Product Lead & Quant Analytics
+- Pawan Singh — Data & Backend Engineering
+- Vikas Shukla — Frontend, UX & Demo
+
+YOUR MISSION
+
+Build GoldPrism as a complete, professional, production-minded MCX gold intelligence and trading execution platform. The goal is to transform raw commodity market data into explainable analysis, validated trading opportunities, risk-controlled order execution, and transparent performance monitoring.
+
+IMPORTANT: Build the complete application, not just a landing page or static UI mockup. Every major button, navigation item, chart, filter, form, dashboard panel, and workflow must work. Use real calculations and connected backend services wherever possible. Clearly label simulated data and never present mock results as actual market data or verified trading performance.
+
+If an existing project or repository is available, inspect it first. Preserve all existing features, content, routes, components, styles, and working functionality. Do not delete or replace existing work unnecessarily. Integrate and improve it incrementally. If starting from zero, create the complete application architecture.
+
+==================================================
+1. PRODUCT VISION
+==================================================
+
+GoldPrism is not another generic stock-trading dashboard.
+
+It is a specialized, explainable commodity derivatives intelligence platform focused initially on the MCX gold contract family.
+
+Its core workflow is:
+
+Market Data → Data Validation → Contract Normalization → Spread Analysis → X-Ray Decomposition → Signal Validation → Transaction Costs → Risk Checks → Trade/No-Trade Decision → Paper/Live Execution → Monitoring → Performance Analytics.
+
+The central philosophy is:
+
+“Explain every trading decision. Prove the edge. Know when NOT to trade.”
+
+The platform must support research, decision support, paper trading, broker-connected manual execution, and a carefully controlled path toward automated execution.
+
+==================================================
+2. PREMIUM USER INTERFACE
+==================================================
+
+Create a sophisticated financial terminal with a unique GoldPrism visual identity.
+
+Design requirements:
+- Premium dark interface with black/charcoal surfaces and restrained gold, violet, and cyan accents.
+- Professional typography, consistent spacing, subtle animations, polished charts, and excellent visual hierarchy.
+- Responsive desktop, tablet, and mobile layouts.
+- Persistent sidebar navigation and a useful top navigation bar.
+- Light/dark theme support if compatible with the architecture.
+- Loading skeletons, empty states, error states, success messages, and tooltips.
+- Accessible contrast, keyboard navigation, and clear confirmation dialogs.
+- Avoid generic AI-generated landing-page aesthetics, excessive gradients, unnecessary glassmorphism, and decorative elements that reduce usability.
+- Use real reusable components and consistent design tokens.
+- Charts must show meaningful labels, dates, units, legends, and explanations.
+
+Create a product experience that looks credible to quantitative researchers, bullion dealers, professional traders, and hackathon judges.
+
+==================================================
+3. APPLICATION NAVIGATION
+==================================================
+
+Implement these working sections:
+
+1. Overview Dashboard
+2. Live Market & Data Health
+3. Spread Explorer
+4. X-Ray Waterfall
+5. Signal Intelligence
+6. Best Vehicle Ranking
+7. Strategy Lab
+8. Backtest Lab
+9. Paper Trading
+10. Trade Execution
+11. Open Positions & Orders
+12. Portfolio & P&L
+13. Risk Management
+14. Alerts & Notifications
+15. Research Reports
+16. Data Sources & Pipeline
+17. Settings & Broker Connections
+18. Audit Logs
+19. Help & Methodology
+
+Each section must have a clear purpose and functional interactions. Do not create dead-end pages or buttons that do nothing.
+
+==================================================
+4. MCX GOLD CONTRACT INTELLIGENCE
+==================================================
+
+Initially support the following contract family described in the hackathon brief:
+
+- GOLDM
+- GOLDTEN
+- GOLDGUINEA
+- GOLDPETAL
+
+Treat contract specifications, expiry calendars, lot sizes, quotation units, purity, tick sizes, and settlement rules as configurable reference data.
+
+Verify specifications against authoritative, current exchange documentation before using them in live calculations. Do not hardcode unverified contract specifications as permanent facts.
+
+Build a contract reference service that supports:
+- Contract symbol and expiry identification.
+- Contract-specific trading units.
+- Quote-unit conversion.
+- Fine-gold purity normalization.
+- Expiry and rollover calendars.
+- Trading-day calendars.
+- Contract eligibility and data-quality flags.
+- Historical contract mapping.
+
+Normalize comparable prices to a clearly defined common basis, such as rupees per gram of fine gold, using documented formulas and verified contract specifications.
+
+Make all conversion assumptions visible to the user.
+
+==================================================
+5. MARKET DATA ENGINE
+==================================================
+
+Implement a modular market-data layer.
+
+Potential sources:
+- Officially available MCX bhavcopy and historical market data.
+- Authorized market-data providers.
+- Broker APIs where the required data permissions are available.
+- Local CSV uploads for research and demos.
+
+Features:
+- Daily historical OHLC data.
+- Settlement prices.
+- Volume and open interest when available.
+- Contract expiry dates.
+- Data freshness indicators.
+- Source attribution and timestamps.
+- Retry logic and rate-limit handling.
+- Schema validation.
+- Duplicate detection.
+- Missing-value detection.
+- Trading-calendar checks.
+- Requested-date versus returned-date validation.
+- Outlier detection.
+- Immutable raw-data snapshots where practical.
+- Reproducible ingestion logs.
+
+Store validated analytical datasets using Parquet and DuckDB, with Python and Polars for data processing where appropriate.
+
+Use GitHub Actions for scheduled ingestion, automated tests, and data-quality checks when supported by the environment.
+
+Do not bypass access controls, scrape prohibited sources, or misrepresent delayed data as live data.
+
+If no authorized live source is configured, show clearly labeled historical, uploaded, or simulated data.
+
+==================================================
+6. DATA INTEGRITY & TRUST ENGINE
+==================================================
+
+Every market-data observation must have an explicit trust status.
+
+Implement:
+- Missing data checks.
+- Invalid OHLC checks.
+- Invalid or mismatched dates.
+- Duplicate records.
+- Stale settlement detection.
+- Abnormal price-change checks.
+- Volume and open-interest consistency checks where applicable.
+- Contract-expiry validation.
+- Source availability checks.
+- Data freshness warnings.
+- Rejection and exclusion logs.
+
+Provide statuses such as:
+- TRUSTED
+- WARNING
+- REJECTED
+- STALE
+- INSUFFICIENT DATA
+
+A failed critical integrity check must block affected signals and, where appropriate, prevent order execution.
+
+Create a Data Health dashboard showing errors, warnings, rejected rows, missing dates, source freshness, and validation history.
+
+==================================================
+7. GOLDPRISM X-RAY WATERFALL
+==================================================
+
+This is the signature feature and must be implemented as a real analytical workflow, not merely a decorative chart.
+
+The X-Ray engine should explain the observed spread between comparable gold contracts by decomposing it into defensible components.
+
+Potential components:
+- Normalized raw spread.
+- Economic basis differences.
+- Expiry and carry effects.
+- Settlement or data artifacts.
+- Estimated residual.
+- Transaction costs.
+- Net residual or net opportunity estimate.
+
+Do not assume that every component is directly observable. Document the estimation method, assumptions, limitations, and uncertainty.
+
+Avoid double-counting components.
+
+Use mathematically consistent calculations with reconciliation checks so that the components sum to the defined raw spread within a documented tolerance.
+
+Display:
+- Raw spread.
+- Each estimated component.
+- Residual.
+- Estimated transaction costs.
+- Net estimated edge.
+- Confidence or uncertainty information.
+- Data-quality status.
+- Explanation of each component.
+- Reasons the signal may be unreliable.
+
+Use a waterfall chart and supporting detail panels.
+
+If there is insufficient data to produce a valid decomposition, show why the analysis is unavailable rather than inventing values.
+
+==================================================
+8. SIGNAL INTELLIGENCE & NO-EDGE ENGINE
+==================================================
+
+Build an explainable signal engine.
+
+Evaluate:
+- Normalized spreads.
+- Historical spread distributions.
+- Residual magnitude.
+- Market liquidity.
+- Contract expiry proximity.
+- Data trust.
+- Estimated execution costs.
+- Slippage assumptions.
+- Signal stability.
+- Uncertainty and statistical significance.
+
+Support these verdicts:
+
+TRADABLE:
+A candidate opportunity meets the configured analytical, cost, data-quality, and risk criteria. This does not guarantee profit.
+
+WATCH:
+A potential opportunity exists, but uncertainty, liquidity, costs, or other conditions require caution.
+
+NO EDGE:
+The available evidence does not establish a sufficiently attractive risk-adjusted opportunity.
+
+BLOCKED:
+A critical data, broker, compliance, or risk requirement prevents trading.
+
+Every verdict must explain:
+- Why it was assigned.
+- Which conditions passed or failed.
+- Estimated gross and net edge.
+- Estimated costs.
+- Confidence and uncertainty.
+- Data freshness.
+- Expiry-related risks.
+- What would change the verdict.
+
+Never force a BUY or SELL recommendation when evidence is insufficient.
+
+“No Edge” must be a first-class product outcome, not an error state.
+
+==================================================
+9. TRANSACTION COST ENGINE
+==================================================
+
+Estimate net trading economics using configurable, documented inputs.
+
+Include relevant costs such as:
+- Brokerage.
+- Exchange transaction charges.
+- Applicable taxes and duties.
+- GST where applicable.
+- Securities or commodity transaction taxes where applicable.
+- Slippage.
+- Bid-ask spread.
+- Other applicable fees.
+
+Verify current rules and rates against authoritative sources before enabling live cost calculations.
+
+Support different broker fee schedules.
+
+Display:
+- Gross estimated edge.
+- Entry costs.
+- Exit costs.
+- Total estimated round-trip costs.
+- Net estimated edge.
+- Break-even movement.
+- Sensitivity to slippage and fees.
+
+Never treat a gross spread as guaranteed profit.
+
+==================================================
+10. BEST VEHICLE RANKING
+==================================================
+
+Create a comparison engine to rank eligible gold contracts for a defined exposure.
+
+Consider:
+- Exposure matching.
+- Normalized prices.
+- Trading costs.
+- Liquidity.
+- Bid-ask spread where available.
+- Volume and open interest.
+- Contract expiry.
+- Rollover risk.
+- Minimum tradable lot.
+- Available capital and margin requirements.
+- Data quality.
+- Estimated slippage.
+
+Explain why each vehicle ranks where it does.
+
+Allow users to modify their target exposure and compare alternatives.
+
+Do not automatically rank a contract first simply because its nominal price is lower.
+
+==================================================
+11. STRATEGY LAB
+==================================================
+
+Build a research workspace where users can:
+- Select contract pairs.
+- Configure spread definitions.
+- Choose historical date ranges.
+- Adjust signal thresholds.
+- Configure cost assumptions.
+- Set liquidity filters.
+- Inspect historical spread distributions.
+- Compare strategies.
+- Save strategy configurations.
+- Review changes between strategy versions.
+
+Use reproducible configuration files and record strategy parameters.
+
+Prevent look-ahead bias and data leakage.
+
+Clearly distinguish exploratory analysis from validated results.
+
+==================================================
+12. BACKTEST LAB
+==================================================
+
+Implement a genuine backtesting engine, not a chart populated with arbitrary performance numbers.
+
+Requirements:
+- Walk-forward evaluation.
+- Chronological train/test separation.
+- Frozen strategy configurations.
+- Sealed holdout evaluation.
+- Signal at time t and execution no earlier than the configured executable time, such as t+1.
+- Realistic transaction costs.
+- Slippage assumptions.
+- Contract rollover handling.
+- Liquidity constraints.
+- Position sizing.
+- Margin and exposure checks.
+- Missing-data handling.
+- Trade logs.
+- Equity curve.
+- Drawdown curve.
+- Gross versus net P&L.
+- Sharpe ratio with documented assumptions.
+- Hit rate.
+- Turnover.
+- Trade count.
+- Average win and loss.
+- Maximum drawdown.
+- Confidence intervals.
+- Block bootstrap or other appropriate uncertainty analysis.
+- Minimum detectable effect (MDE), where methodologically appropriate.
+
+Prevent future data from influencing historical decisions.
+
+Freeze configurations before holdout evaluation and log configuration hashes.
+
+Clearly label every metric according to whether it comes from real historical backtesting, an illustrative example, or a simulation.
+
+Never fabricate performance, Sharpe ratios, win rates, or returns.
+
+==================================================
+13. PAPER TRADING ENGINE
+==================================================
+
+Implement a fully functional paper-trading environment.
+
+Features:
+- Simulated account balance.
+- Virtual positions.
+- Simulated order placement.
+- Configurable slippage and fees.
+- Position and order history.
+- Realized and unrealized P&L.
+- Margin estimates.
+- Strategy attribution.
+- Paper portfolio performance.
+- Resettable demo account.
+- Explicit PAPER MODE indicators.
+
+Paper trading must use a separate execution adapter and must never accidentally submit live broker orders.
+
+When live market data is unavailable, allow clearly labeled historical replay or synthetic scenarios.
+
+Provide a reliable end-to-end demonstration of signal generation, risk validation, order submission, simulated fills, position updates, and P&L tracking.
+
+==================================================
+14. MANUAL LIVE TRADE EXECUTION
+==================================================
+
+Design a broker-adapter architecture that supports officially authorized broker APIs.
+
+Do not invent API endpoints or assume a broker supports every MCX contract or order type.
+
+Broker integration must be implemented only against the broker's current official documentation.
+
+Features:
+- Secure broker connection flow.
+- Authentication and authorization.
+- Instrument and expiry validation.
+- BUY/SELL order ticket.
+- Contract selection.
+- Quantity and lot-size validation.
+- Order type selection where supported.
+- Limit-price validation.
+- Estimated costs and margin.
+- Pre-trade risk checks.
+- Order preview.
+- Explicit user confirmation.
+- Order submission.
+- Order status monitoring.
+- Partial-fill handling.
+- Rejected-order explanations.
+- Cancellation where supported.
+- Position reconciliation.
+- Broker-versus-platform state reconciliation.
+- Detailed audit trail.
+
+Require explicit confirmation before placing a live order.
+
+Never silently switch from paper mode to live mode.
+
+Never display a simulated order as a real broker order.
+
+If broker credentials or an API are unavailable, implement a clearly labeled mock adapter for demonstrations and explain how to configure a real adapter.
+
+==================================================
+15. AUTOMATED TRADING ENGINE
+==================================================
+
+Design an optional automated-execution module that is disabled by default.
+
+Implement a staged workflow:
+1. Strategy configuration.
+2. Historical validation.
+3. Paper-trading evaluation.
+4. Broker connection and permission validation.
+5. Risk-policy configuration.
+6. Explicit automation authorization.
+7. Monitored execution.
+8. Emergency shutdown.
+
+Features:
+- Strategy enable/disable controls.
+- Configurable position and exposure limits.
+- Maximum order size.
+- Daily loss limits.
+- Margin checks.
+- Duplicate-order protection.
+- Idempotency where supported.
+- Order throttling.
+- Retry rules that avoid duplicate orders.
+- Market-hours checks.
+- Expiry and rollover restrictions.
+- Stale-data shutdown.
+- Broker-disconnection handling.
+- Partial-fill and rejection handling.
+- Position reconciliation.
+- Emergency kill switch.
+- Audit logs for every decision and action.
+
+Use the broker's official capabilities and applicable regulations to determine what automation is permitted.
+
+Do not implement evasion of broker controls, exchange rules, authentication, or regulatory requirements.
+
+Automated live trading must remain disabled until the required broker integration, user authorization, testing, and compliance checks are complete.
+
+==================================================
+16. RISK MANAGEMENT ENGINE
+==================================================
+
+Create a centralized pre-trade and post-trade risk engine.
+
+Checks should include:
+- Maximum order quantity.
+- Maximum position exposure.
+- Available funds and margin.
+- Contract eligibility.
+- Liquidity thresholds.
+- Maximum estimated transaction cost.
+- Maximum permitted slippage.
+- Daily loss limits.
+- Position concentration.
+- Expiry restrictions.
+- Stale market data.
+- Broker connection status.
+- Strategy authorization.
+- Duplicate orders.
+- Market-session restrictions.
+
+Allow users to configure permitted limits within supported rules.
+
+Provide a risk dashboard with current exposure, margin estimates, open positions, realized/unrealized P&L, and breached limits.
+
+Risk checks must run on the backend immediately before live order submission, not only in the frontend.
+
+If a critical check fails, block the order and explain the reason.
+
+Never promise that risk controls eliminate losses.
+
+==================================================
+17. ORDER MONITORING & PORTFOLIO ANALYTICS
+==================================================
+
+Implement:
+- Open orders.
+- Filled orders.
+- Partially filled orders.
+- Rejected and cancelled orders.
+- Open positions.
+- Average entry price.
+- Realized P&L.
+- Unrealized P&L.
+- Brokerage and transaction-cost attribution.
+- Position-level exposure.
+- Trade history.
+- Strategy-level attribution.
+- Daily and cumulative performance.
+- Downloadable reports.
+- Broker reconciliation status.
+
+Use actual broker-confirmed data for live positions and clearly separate it from paper-trading records.
+
+==================================================
+18. ALERTS & NOTIFICATIONS
+==================================================
+
+Create an alert engine for:
+- New candidate spreads.
+- TRADABLE, WATCH, NO EDGE, and BLOCKED verdict changes.
+- Data-quality failures.
+- Stale data.
+- Expiry warnings.
+- Risk-limit breaches.
+- Order fills and rejections.
+- Broker disconnections.
+- Strategy shutdowns.
+
+Support in-app notifications first.
+
+Add optional Telegram Bot API integration through secure configuration. Treat WhatsApp and other integrations as future extensions unless properly configured.
+
+Include alert preferences, delivery status, and deduplication.
+
+==================================================
+19. RESEARCH REPORTS & EXPLAINABILITY
+==================================================
+
+Provide exportable research reports containing:
+- Data sources and timestamps.
+- Contract specifications used.
+- Normalization methodology.
+- X-Ray decomposition.
+- Signal verdict and reasoning.
+- Cost assumptions.
+- Risk checks.
+- Backtest methodology.
+- Performance metrics.
+- Confidence intervals and limitations.
+- Configuration version or hash.
+
+Allow CSV and appropriate report exports.
+
+Each reported result must be reproducible from the recorded data, configuration, and code version as far as practical.
+
+==================================================
+20. TECHNICAL ARCHITECTURE
+==================================================
+
+Prefer a modular architecture using:
+
+QUANTITATIVE & DATA:
+- Python
+- Polars
+- DuckDB
+- Parquet
+- NumPy
+- pandas or statsmodels where appropriate
+
+FRONTEND:
+- React and TypeScript if the environment supports them.
+- A consistent component system.
+- Interactive charting library.
+- Responsive navigation and accessible forms.
+
+BACKEND:
+- FastAPI or an equivalent framework suited to the existing project.
+- Validated request and response schemas.
+- Separate services for ingestion, analysis, risk, backtesting, and execution.
+- Background jobs where required.
+
+DATABASE:
+- Use the existing database if the project already has one.
+- Otherwise choose a suitable persistent database for application state.
+- Use DuckDB and Parquet for analytical workloads where appropriate.
+
+INFRASTRUCTURE:
+- Environment-based configuration.
+- Docker where useful.
+- GitHub Actions for CI and scheduled jobs.
+- Automated tests.
+- Structured logging.
+- Database migrations where applicable.
+
+Do not introduce unnecessary technologies simply to make the stack appear impressive. Respect the existing architecture and explain any significant changes.
+
+==================================================
+21. SECURITY & ACCOUNT SAFETY
+==================================================
+
+Implement:
+- Secure server-side secret management.
+- Environment variables for credentials.
+- No API keys or broker secrets in frontend code.
+- No committed .env files.
+- Authentication and session protection where required.
+- Authorization checks for sensitive actions.
+- Input validation.
+- Rate limiting where appropriate.
+- Secure error handling.
+- Audit logging.
+- Protection against unauthorized order submission.
+- Safe handling of broker tokens and sessions.
+- Separation of paper and live environments.
+
+Never request users to paste broker passwords, OTPs, or sensitive credentials into source code or chat.
+
+==================================================
+22. DEMONSTRATION EXPERIENCE
+==================================================
+
+Create a polished, judge-friendly demo flow:
+
+STEP 1: Open Overview Dashboard and inspect data health.
+
+STEP 2: Select a gold contract pair in Spread Explorer.
+
+STEP 3: View the normalized spread and X-Ray waterfall.
+
+STEP 4: Inspect the TRADABLE, WATCH, NO EDGE, or BLOCKED verdict and its explanation.
+
+STEP 5: Open Best Vehicle Ranking and compare contracts.
+
+STEP 6: Run a reproducible backtest and inspect gross versus net performance.
+
+STEP 7: Open Paper Trading, review the order ticket, pass risk checks, and simulate execution.
+
+STEP 8: Inspect the resulting position, costs, and P&L.
+
+STEP 9: Open the live execution panel to demonstrate broker connection status, order preview, risk validation, and confirmation requirements. Use a mock broker when real authorized integration is unavailable.
+
+STEP 10: Demonstrate the emergency kill switch and audit trail in a safe test environment.
+
+Prepare a seeded demonstration dataset with intentional faults, such as missing values, a date mismatch, stale data, and outliers.
+
+Show that the system detects and handles these faults correctly.
+
+All synthetic values, simulated fills, and illustrative results must be visibly labeled.
+
+Never claim that the demo executed real orders unless the broker confirms those orders.
+
+==================================================
+23. MARKET RESEARCH & BUSINESS MODEL
+==================================================
+
+Design the product for:
+- Quantitative researchers.
+- Commodity trading desks.
+- Bullion dealers and jewellers.
+- Experienced retail and proprietary traders.
+- Research teams and brokers.
+
+Potential monetization:
+- Free research tier.
+- Proposed Pro subscription.
+- Professional research and analytics tools.
+- Enterprise API and desk integrations.
+
+Treat pricing, adoption numbers, market size, and revenue projections as hypotheses until validated.
+
+Do not present illustrative business targets as established results.
+
+Differentiate GoldPrism through explainability, contract-aware normalization, transaction-cost analysis, strict data integrity, honest statistical validation, and an explicit NO EDGE outcome.
+
+==================================================
+24. FUTURE ROADMAP
+==================================================
+
+PHASE 1:
+Complete the research dashboard, data pipeline, normalization, X-Ray engine, signal explanations, and data integrity gates.
+
+PHASE 2:
+Complete reproducible backtesting, paper trading, performance reports, and alerts.
+
+PHASE 3:
+Integrate an officially supported broker API, manual order execution, server-side risk checks, monitoring, and reconciliation.
+
+PHASE 4:
+Develop optional automated execution only after broker, regulatory, security, and operational requirements are satisfied.
+
+PHASE 5:
+Explore additional commodities and cross-exchange analysis, subject to data licensing, instrument availability, and validated methodology.
+
+Maintain the original MCX gold focus while ensuring the architecture can be extended.
+
+==================================================
+25. REQUIRED ENGINEERING STANDARDS
+==================================================
+
+- Do not build a static-only prototype.
+- Do not fabricate live market prices or backtest results.
+- Do not use random numbers for production calculations.
+- Do not hardcode broker secrets.
+- Do not bypass risk checks.
+- Do not silently submit real orders.
+- Do not remove working features from an existing project.
+- Do not replace real business logic with decorative mock components.
+- Do not claim unfinished functionality is complete.
+- Add unit tests for financial calculations.
+- Add integration tests for the core data-to-decision workflow.
+- Add tests for risk failures and order-state handling.
+- Add realistic error handling and validation.
+- Document assumptions, formulas, data sources, and setup instructions.
+- Ensure that calculations are consistent across the frontend, backend, and exported reports.
+- Ensure that important operations have clear loading, success, and failure states.
+
+==================================================
+26. IMPLEMENTATION INSTRUCTIONS
+==================================================
+
+Follow this process:
+
+1. Inspect the existing repository, files, dependencies, routes, UI components, database, and current functionality.
+
+2. Identify what already works, what is partially implemented, and what is missing.
+
+3. Create a prioritized implementation plan and architecture map.
+
+4. Preserve all existing working features and content. Do not perform destructive rewrites.
+
+5. Implement the core data pipeline and financial calculations first.
+
+6. Implement the X-Ray waterfall, signal engine, transaction-cost model, and best-vehicle ranking.
+
+7. Implement the dashboard and connect every analytical view to real backend calculations or clearly labeled demo fixtures.
+
+8. Implement the backtesting engine, paper-trading workflow, risk engine, and audit logs.
+
+9. Add the broker-adapter interface and a mock broker for safe demonstrations.
+
+10. Implement manual live execution only for a properly configured and officially supported broker.
+
+11. Add automated execution controls, but keep live automation disabled until every required authorization and safety gate is satisfied.
+
+12. Run available tests, fix integration errors, and verify the main user workflows.
+
+13. Verify responsive layouts, navigation, loading states, error states, and form validation.
+
+14. Provide clear setup instructions, environment-variable examples, test instructions, and a list of features that are fully implemented versus awaiting external configuration.
+
+Do not stop after producing a plan or a landing page. Continue implementing the highest-priority working features within the available environment. If a required API, credential, market-data source, or external service is unavailable, implement the appropriate safe interface or simulation, clearly document the limitation, and continue with the rest of the application.
+
+==================================================
+FINAL PRODUCT REQUIREMENT
+==================================================
+
+GoldPrism must combine:
+
+EXPLAINABLE QUANTITATIVE RESEARCH
++ CONTRACT-AWARE SPREAD INTELLIGENCE
++ TRUSTWORTHY DATA VALIDATION
++ COST-AWARE SIGNALS
++ HONEST BACKTESTING
++ BEST-VEHICLE RANKING
++ PAPER TRADING
++ BROKER-CONNECTED MANUAL EXECUTION
++ OPTIONAL CONTROLLED AUTOMATION
++ CENTRALIZED RISK MANAGEMENT
++ ORDER MONITORING
++ PERFORMANCE ANALYTICS
++ AUDITABILITY.
+
+The defining promise of GoldPrism is:
+
+“From scattered gold spreads to explainable decisions and controlled execution — with the confidence to trade when justified and the discipline to stay out when there is no edge.”
+
+Build GoldPrism as a credible, testable, professional product. Prioritize working functionality, mathematical correctness, safety, transparency, and a memorable demonstration over exaggerated claims or unnecessary visual effects.
